@@ -215,8 +215,8 @@ test1:
 | style_layers_weights   | Weights list for each feature layer loss, None - regular average between layers       |
 | style_resize   | If true, will resize style image to be in the same size as content        |
 | content_layers   | Layers of backbone layers that will be used for feature extraction, [conv_i], when i index of layer in list of cnn layer of backbone        |
-| style   | image name that will bbe used for style transfer, must be in 'data/style'        |
-| content   | image name that will bbe used for content transfer, must be in 'data/content'             |
+| style   | image name that will be used for style transfer, must be in 'data/style'        |
+| content   | image name that will be used for content transfer, must be in 'data/content'             |
 
 * This config file support running a number of style transfers, can be added in the same format,
 ``` yaml
