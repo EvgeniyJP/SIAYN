@@ -85,7 +85,7 @@ Gram matrix is features correlation between different filters in CNN layer. The 
 
 Install my-project with npm
 
-```
+```bash
   git clone https://github.com/EvgeniyJP/SIAYN.git
   cd SIAYN
   pip install requirements.txt
@@ -218,7 +218,7 @@ test1:
 | content   | image name that will bbe used for content transfer, must be in 'data/content'             |
 
 * This config file support running a number of style transfers, can be added in the same format,
-``` 
+``` yaml
 test1:
     parameters...
 test2:
@@ -227,7 +227,7 @@ test2:
 * For multi stlye transfer, style_weight must be a list of weights for ieach image style, style - must be a list toof file names for style 
 
 ### Configuration example file for postprocessing 
-```
+```yaml
 test1:
   use_denoise: True
   p3: 10
@@ -280,7 +280,7 @@ test1:
 | fps   | FPS - number of images per second         |
 
 * This config file support running a number of postprocessing, can be added in the same format,
-``` 
+``` yaml
 test1:
     parameters...
 test2:
