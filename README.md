@@ -16,6 +16,7 @@ This algorithm can be described in a few steps:  image preprocessing, feature ex
 * The next step is *content loss* calculation. The content loss measures the similarity between the feature representations of the content image and the generated image (that was initialized in one from different techniques). This loss in our case was computed as the mean squared error (MSE) between the feature maps of a chosen layer in the backbone CNN. Based on original paper [2] the content loss calculated in this way,
 <img src="for_github/e1.jpg"  width="140" height="25">
  when p is original image, x generated, l is layer that was used for feature extraction from backbone CNN, F^l and P^l are features maps representing respectively layer l.
+
 * *Style loss* calculation quantifies the difference in style between the style image and the generated image.
 It is computed by comparing the correlations of feature maps at different layers of the backbone CNN. 
 The style loss in our case is calculated as the mean squared error (MSE) between the Gram matrices of the style image and the generated image. 
