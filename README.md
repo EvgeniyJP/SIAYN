@@ -11,16 +11,16 @@ Once upon a time, painters and photographers practiced their skills over many ye
 Based on Image Optimization - this method, of image style transfer, using convolutional neural networks for feature extraction and optimization techniques for blending between content and style images. To generate new image, an image optimization is conducted to align feature representations (of content and style) with those of the example images.
 This algorithm can be described in a few steps:  image preprocessing, feature extraction, content representation distance  (content loss), style representation distance (style loss), optimization based on sum of both content and style losses and postprocessing. 
 
-* The first step, preprocessing, usually in our case its image resizing and normalization. Resizing for content image can be done for image scaling up (super resolution, will be discussed further) or for image scaling down if there is not enough GPU memory. 
-* Feature extraction – the content image and style image are passed through the backbone Convolutional Neural Network (CNN) model, layer by layer, to extract features. In our work VGG16 and VGG19 were tested. The features can be extracted from each layer of the model and different layers can be used for computing of content and loss style.
-* The next step is content loss calculation. The content loss measures the similarity between the feature representations of the content image and the generated image (that was initialized in one from different techniques). This loss in our case was computed as the mean squared error (MSE) between the feature maps of a chosen layer in the backbone CNN. Based on original paper [2] the content loss calculated in this way,
+* The first step, *preprocessing*, usually in our case its image resizing and normalization. Resizing for content image can be done for image scaling up (super resolution, will be discussed further) or for image scaling down if there is not enough GPU memory. 
+* *Feature extraction* – the content image and style image are passed through the backbone Convolutional Neural Network (CNN) model, layer by layer, to extract features. In our work VGG16 and VGG19 were tested. The features can be extracted from each layer of the model and different layers can be used for computing of content and loss style.
+* The next step is *content loss* calculation. The content loss measures the similarity between the feature representations of the content image and the generated image (that was initialized in one from different techniques). This loss in our case was computed as the mean squared error (MSE) between the feature maps of a chosen layer in the backbone CNN. Based on original paper [2] the content loss calculated in this way,
 <img src="for_github/e1.jpg"  width="140" height="25">
  when p is original image, x generated, l is layer that was used for feature extraction from backbone CNN, F^l and P^l are features maps representing respectively layer l.
-* Style loss calculation quantifies the difference in style between the style image and the generated image.
+* *Style loss* calculation quantifies the difference in style between the style image and the generated image.
 It is computed by comparing the correlations of feature maps at different layers of the backbone CNN. 
 The style loss in our case is calculated as the mean squared error (MSE) between the Gram matrices of the style image and the generated image. 
 Gram matrix is features correlation between different filters in CNN layer. The Gram matrix calculating in the following way: 
-<img src="for_github/e2.jpg"  width="130" height="27">. The style loss for each layer <img src="for_github/e3.jpg"  width="140" height="25"> and total for all layers that were used: <img src="for_github/e4.jpg"  width="140" height="25">. When a ⃗ is original image and x ⃗ is generated one, l  is the layer that used for style loss. A^l and G^l are gram matrices of style and generated images. L_style is weighted sum of all differences in gram matrices in different layers that were used. 
+<img src="for_github/e2.jpg"  width="130" height="27"> The style loss for each layer <img src="for_github/e3.jpg"  width="140" height="25"> and total for all layers that were used: <img src="for_github/e4.jpg"  width="140" height="25">. When a is original image and x is generated one, l  is the layer that used for style loss. A^l and G^l are gram matrices of style and generated images. L_style is weighted sum of all differences in gram matrices in different layers that were used. 
  
 * *Optimization step* – For a new image generation, first its need to be initialized (for example from Gaussian noise). For input images, content and style, we prepare style and content representation as described above. The same content and style representations are prepared for initialized image. Now we will minimize the distance (using gradient decent) between representations of initialized image and the original style and content images. The optimization is based on total loss, weighted sum of content and style loss. This process will give us our desired blended image.
 * *Postprocessing* – this step is not mandatory, here we can use techniques like denoising, color grading etc. 
@@ -30,7 +30,7 @@ Gram matrix is features correlation between different filters in CNN layer. The 
 
 ## 📝Features
  
-1. ***Code with modules, parametric flexibility*** - Code build with module for easy expansion, additions and changes. Like adding backbone, change loss type etc.
+1. ***Code with modules, parametric flexibility*** - Code build with modules structure for easy expansion, additions and changes. Like adding backbone, change loss type etc.
 2. ***Different style/content weight*** – the loss for optimization consists of weighted sum of content and style losses that can be tunned. 
 3. ***Initialization method*** – Number of different initialization for generated image can be chosen, Gaussian noise, style or content images. 
 4. ***Total variation loss*** - option to add TV loss to total loss, designed to encourage smoothness and reduce noise in an image.
@@ -47,11 +47,40 @@ Gram matrix is features correlation between different filters in CNN layer. The 
 - Histogram matching to manipulate color tone of output image.
 
 ## 🎯Results
-Examples of Lena with different style
+### Examples of Lena with different style
 
 | ![The process](for_github/t1.gif) | ![The process](for_github/t2.gif) | ![The process](for_github/t3.gif) |
 |-----------------------------------|-----------------------------------|-----------------------------------|
 | ![The process](for_github/t4.gif) | ![The process](for_github/t5.gif) | ![The process](for_github/t6.gif) |
+
+### Effect os style/content weights
+| Test ID              | 1    | 2    | 3    | 4    | 5    | 6    |
+|----------------------|------|------|------|------|------|------|
+| style weight         | 1e5  | 1e4  | 1e3  | 1e5  | 1e4  | 1e3  |
+| content weight       | 1e2  | 1e2  | 1e2  | 1e3  | 1e3  | 1e3  |
+| total variation weight | 1e-2 | 1e-2 | 1e-2 | 1e-2 | 1e-2 | 1e-2 |
+
+![Results](for_github/r1.jpg)
+
+### Initialization method 
+| Test ID              | 8   | 9   | 4      |
+|----------------------|-----|-----|--------|
+| initialization       | style | content | random |
+
+![Results](for_github/r2.jpg)
+
+### Multi style 
+
+![Results](for_github/r3.jpg)
+
+
+### Postprocessing - mask applying
+
+![Results](for_github/r4.jpg)
+
+### Postprocessing - Histogram matching 
+![Results](for_github/r5.jpg)
+
 ## 🧑‍💻Installation
 
 Install my-project with npm
