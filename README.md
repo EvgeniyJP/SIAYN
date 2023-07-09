@@ -84,7 +84,7 @@ Gram matrix is features correlation between different filters in CNN layer. The 
 
 ## 🧑‍💻Installation
 
-Install my-project with npm
+Install this project
 
 ```bash
   git clone https://github.com/EvgeniyJP/SIAYN.git
