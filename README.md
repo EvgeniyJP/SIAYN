@@ -20,7 +20,7 @@ This algorithm can be described in a few steps:  image preprocessing, feature ex
 It is computed by comparing the correlations of feature maps at different layers of the backbone CNN. 
 The style loss in our case is calculated as the mean squared error (MSE) between the Gram matrices of the style image and the generated image. 
 Gram matrix is features correlation between different filters in CNN layer. The Gram matrix calculating in the following way: 
-<img src="for_github/e2.jpg"  width="130" height="27">. The style loss for each layer <img src="for_github/e3.jpg"  width="140" height="25"> and total for all layers that were used: <img src="for_github/e4.jpg"/  width="140" height="25">. When a ⃗ is original image and x ⃗ is generated one, l  is the layer that used for style loss. A^l and G^l are gram matrices of style and generated images. L_style is weighted sum of all differences in gram matrices in different layers that were used. 
+<img src="for_github/e2.jpg"  width="130" height="27">. The style loss for each layer <img src="for_github/e3.jpg"  width="140" height="25"> and total for all layers that were used: <img src="for_github/e4.jpg"  width="140" height="25">. When a ⃗ is original image and x ⃗ is generated one, l  is the layer that used for style loss. A^l and G^l are gram matrices of style and generated images. L_style is weighted sum of all differences in gram matrices in different layers that were used. 
  
 * *Optimization step* – For a new image generation, first its need to be initialized (for example from Gaussian noise). For input images, content and style, we prepare style and content representation as described above. The same content and style representations are prepared for initialized image. Now we will minimize the distance (using gradient decent) between representations of initialized image and the original style and content images. The optimization is based on total loss, weighted sum of content and style loss. This process will give us our desired blended image.
 * *Postprocessing* – this step is not mandatory, here we can use techniques like denoising, color grading etc. 
@@ -56,14 +56,38 @@ Examples of Lena with different style
 
 Install my-project with npm
 
-```bash
-  npm install my-project
-  cd my-project
 ```
-    
-## 💻Demo
+  git clone https://github.com/EvgeniyJP/SIAYN.git
+  cd SIAYN
+  pip install requirements.txt
+```
+## 🏃Usage/Examples
 
-Insert gif or link to demo
+Start style transfer with specific config file, more about config file can be found below 
+```
+python style_runner.py --config_file style_transfer_default
+```
+
+Start style transfer with default config file, more about default config file can be found below 
+```
+python style_runner.py
+```
+
+Perform postprocessing with specific config file 
+```
+python postprocess_runner.py --config_file  postprocessing_default
+```
+
+Run GUI 
+```
+python gui_runner.py  
+```
+## 💻Gui Demo- Gradio Based
+
+This Gui helps to understand basic parameters and their influence. How to run the GUI you can see at Usage/Examples. 
+More about parameters you can see in config format explanation.
+![The process](for_github/g1.jpg)
+Currently, the GUI doesn't support multi-style transfer and postprocessing 
 
 
 ## 📁Project Tree
@@ -121,16 +145,6 @@ Insert gif or link to demo
 * ```util\img.py``` - file with all basic image functions like load image, transform, save... In addition to that, postprocessing function like denosing, mask aplying, gif creation and histogram matching also here. 
 
 * ```util\logger.py``` - Here a class for logs printing/saving in more beautiful and comfortable way. 
-## 🏃Usage/Examples
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
-
 
 ## ⚙️Configuration files format
 
