@@ -1,0 +1,25 @@
+test1:
+  use_denoise: True
+  p3: 10
+  p4: 10
+  p5: 7
+  p6: 15
+  img_path: 'result/example/frog!-!Edvard_Munch_1893_The_Scream_oil_tempera_and_pastel_on_cardboard_91_x_73_cm_National_Gallery_of_Norway-825x1024-1.png'
+
+  use_mask: True
+  mask: 'frog_mask.png'
+  content: 'frog.png'
+  styled: 'result/example/frog!-!Edvard_Munch_1893_The_Scream_oil_tempera_and_pastel_on_cardboard_91_x_73_cm_National_Gallery_of_Norway-825x1024-1.png'
+
+  use_histogram: True
+  source: 'result/example/frog!-!Picasso_The_Weeping_Woman.png'
+  target: 'Mona_Lisa_by_Leonardo_da_Vinci_from_C2RMF_retouched-1-687x1024-1.jpg'
+
+  use_mask_creation: True
+  p_image: 'frog.png'
+  scaler: 0.3
+
+  use_gif_creation: False
+  path: 'result/test1'
+  out_name: 'transformation'
+  fps: 5

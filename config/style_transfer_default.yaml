@@ -1,0 +1,17 @@
+test1:
+  scaler: 0.5
+  init_method: 'random'
+  backbone: 'VGG19'
+  lr: 1
+  opt: 'LFBGS'
+  num_steps: 3000
+  style_weight: 1e5
+  content_weight: 1e3
+  tv_weight: 1e-2
+  norm: True
+  style_layers: ['conv_1', 'conv_3', 'conv_5', 'conv_7', 'conv_11']
+  style_layers_weights: null
+  style_resize: True
+  content_layers: ['conv_8', ]
+  style: 'vg_starry_night.jpg'
+  content: 'lena_color.gif'
